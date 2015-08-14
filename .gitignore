@@ -1,26 +1,183 @@
-# Xcode
-#
-build/
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-xcuserdata
-*.xccheckout
-*.moved-aside
-DerivedData
-*.hmap
-*.ipa
-*.xcuserstate
+@implementation Zomble
+-(id)initWith:(NSString *)kind blood :(int)blood loseBlood:(int)loseblood{
+    
+    _kind = kind;
+    _blood = blood;
+    _loseBlood = loseblood;
+    return self;
+}
+-(int)loseBlood{
+    
+    _blood -= _loseBlood;
+    return _blood;
+    
+}
+-(void)die{
+    
+    if (_blood <= 0) {
+        NSLog(@"死了");
+    }
+    
+    
+}
+@end
 
-# CocoaPods
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
-#
-#Pods/
+
+
+@implementation IronZombie
+-(id)initWith:(NSString *)kind blood:(int)blood loseBlood:(int)loseblood prop:(NSString *)prop{
+    
+    
+    _kind = kind;
+    _blood = blood;
+    _loseBlood = loseblood;
+    _prop =prop;
+    
+    return self;
+    
+}
+-(NSString *)loseProp{
+    
+    while (_blood < 51&&_blood > 49) {
+        
+        
+        _prop  = nil;
+        NSLog(@"道具丢失");
+         NSLog(@"接着打");
+        _blood -= 5;
+    
+        
+    }
+    
+    return _prop;
+    
+}
+@end
+
+
+
+
+
+
+
+//
+//  RealIronZombie.m
+//  zy_8_14
+//
+//  Created by lanou3g on 15/8/14.
+//  Copyright (c) 2015年 lanou3g. All rights reserved.
+//
+
+#import "RealIronZombie.h"
+
+@implementation RealIronZombie
+-(void)loseBlood1{
+    
+    _blood -= 5;
+    
+}
+-(NSString *)loseProp{
+    
+    while (_blood < 84&&_blood > 76) {
+        
+        
+        _prop  = nil;
+        NSLog(@"道具丢失");
+        NSLog(@"哎呀  要死 要死");
+        _blood -= 5;
+        
+    }
+    while (_blood > 84) {
+         NSLog(@"-1HP");
+        _blood -=1;
+    }
+   
+    return _prop;
+    
+}
+
+@end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  main.m
+//  zy_8_14
+//
+//  Created by lanou3g on 15/8/14.
+//  Copyright (c) 2015年 lanou3g. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "Zomble.h"
+#import "IronZombie.h"
+#import "RealIronZombie.h"
+int main(int argc, const char * argv[])
+{
+    @autoreleasepool
+    {
+      /*
+        Zomble *zomble = [[Zomble alloc]initWith:@"普通僵尸" blood:50 loseBlood:5];
+        
+        while ([zomble loseBlood] > 0) {
+            
+            
+            NSLog(@"还没死,打~");
+            
+        }
+        
+        [zomble die];
+        
+    }
+    
+       IronZombie *ironZombie = [[IronZombie alloc]initWith:@"路障僵尸" blood:80 loseBlood:2 prop:@"路障"];
+     while ([ironZombie loseBlood] > 0) {
+         
+         
+         [ironZombie loseProp];
+         
+         NSLog(@"接着打");
+         
+     }
+    NSLog(@"死啦~~~~~~~~~~~~~~~~~~~~");
+    
+    
+    
+    
+    */
+    RealIronZombie *real = [[RealIronZombie alloc]initWith:@"铁桶僵尸" blood:120 loseBlood:1 prop:@"铁桶"];
+    
+    while ([real loseBlood] > 0)
+    {
+        
+        [real loseProp];
+        
+        while (real->_blood <50)
+        {
+            real->_blood -= 2;
+            
+            NSLog(@"掉血加快~    -5HP");
+            
+            break;
+        }
+        
+   }
+    
+        NSLog(@"真死了");
+   
+    
+    }
+    return 0;
+}
+
